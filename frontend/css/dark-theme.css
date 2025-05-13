@@ -1,0 +1,183 @@
+/* Dark Theme */
+:root {
+    /* Colors */
+    --color-bg: #121212;
+    --color-bg-hover: #1e1e1e;
+    --color-text: #e0e0e0;
+    --color-text-muted: #a0a0a0;
+    --color-border: #2a2a2a;
+    --color-card-bg: #1a1a1a;
+    --color-sidebar-bg: #171717;
+    --color-sidebar-hover: #252525;
+    --color-sidebar-active: #202020;
+    --color-footer-bg: #0f0f0f;
+    --color-input-bg: #202020;
+    
+    /* Primary Colors - Teal */
+    --color-primary: #00b8a9;
+    --color-primary-dark: #008f85;
+    --color-primary-transparent: rgba(0, 184, 169, 0.15);
+    
+    /* Secondary Colors */
+    --color-secondary: #f8a5c2;
+    --color-secondary-bg: rgba(248, 165, 194, 0.1);
+    --color-secondary-bg-hover: rgba(248, 165, 194, 0.15);
+    
+    /* Status Colors */
+    --color-success: #4caf50;
+    --color-warning: #ff9800;
+    --color-error: #f44336;
+    --color-info: #2196f3;
+    
+    /* White and Black */
+    --color-white: #ffffff;
+    --color-black: #000000;
+}
+
+body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #444;
+}
+
+/* Selection */
+::selection {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+/* Focus Styles */
+:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+/* Gradient Text */
+.gradient-text {
+    background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* Glow Effects */
+.glow-effect {
+    box-shadow: 0 0 15px rgba(0, 184, 169, 0.5);
+}
+
+.glow-text {
+    text-shadow: 0 0 10px rgba(0, 184, 169, 0.7);
+}
+
+/* Custom Checkbox */
+input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--color-border);
+    border-radius: 4px;
+    background-color: var(--color-input-bg);
+    position: relative;
+    cursor: pointer;
+    transition: all var(--transition-speed) ease;
+}
+
+input[type="checkbox"]:checked {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+input[type="checkbox"]:checked::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--color-white);
+    font-size: 12px;
+}
+
+input[type="checkbox"]:hover {
+    border-color: var(--color-primary);
+}
+
+/* Custom Select */
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23a0a0a0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1em;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+.slide-up {
+    animation: slideUp 0.5s ease forwards;
+}
+
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+/* Transitions */
+.transition-all {
+    transition: all var(--transition-speed) ease;
+}
+
+/* Hover Effects */
+.hover-lift {
+    transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--box-shadow-hover);
+}
+
+/* Glass Effect */
+.glass-effect {
+    background: rgba(26, 26, 26, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard - Pathway AI</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="../css/dark-theme.css" />
+</head>
+<body>
+  <div class="dashboard-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <img src="../assets/logo.png" alt="Pathway AI Logo"/>
+          <h1>Pathway AI</h1>
+        </div>
+        <button id="sidebar-toggle" class="sidebar-toggle">
+          <span></span>
+        </button>
+      </div>
+
+      <nav class="sidebar-nav">
+        <ul>
+          <li class="active">
+            <a href="home.html">
+              <span class="nav-icon">🏠</span>
+              <span class="nav-text">Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="personality-test.html">
+              <span class="nav-icon">📝</span>
+              <span class="nav-text">Personality Test</span>
+            </a>
+          </li>
+          <li>
+            <a href="career-path.html">
+              <span class="nav-icon">🛤️</span>
+              <span class="nav-text">Career Paths</span>
+            </a>
+          </li>
+          <li id="admin-link" style="display: none;">
+            <a href="admin.html">
+              <span class="nav-icon">⚙️</span>
+              <span class="nav-text">Admin Dashboard</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-info">
+          <div class="user-avatar">
+            <span id="user-initials">U</span>
+          </div>
+          <div class="user-details">
+            <p id="user-name">User Name</p>
+            <p id="user-email">user@example.com</p>
+          </div>
+        </div>
+        <button id="logout-btn" class="btn btn-outline">Log Out</button>
+      </div>
+    </aside>
+
+    <main class="dashboard-content">
+      <header class="dashboard-header">
+        <h1>Welcome, <span id="welcome-name">User</span>!</h1>
+        <div class="header-actions">
+          <div class="notification-bell">
+            <span>🔔</span>
+            <span class="notification-badge">2</span>
+          </div>
+        </div>
+      </header>
+
+      <div class="dashboard-grid">
+        <section class="dashboard-card progress-card">
+          <h2>Your Progress</h2>
+          <div class="progress-container">
+            <div class="progress-item">
+              <div class="progress-label">
+                <span>Profile Completion</span>
+                <span>75%</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 75%;"></div>
+              </div>
+            </div>
+            <div class="progress-item">
+              <div class="progress-label">
+                <span>Personality Test</span>
+                <span>Not Started</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 0%;"></div>
+              </div>
+            </div>
+          </div>
+          <a href="personality-test.html" class="btn btn-primary">Take Personality Test</a>
+        </section>
+
+        <section class="dashboard-card recommendations-card">
+          <h2>Recommended for You</h2>
+          <div class="recommendations-list">
+            <div class="recommendation-item">
+              <h3>Complete Your Profile</h3>
+              <p>Add more details to get better career recommendations.</p>
+              <a href="#" class="btn btn-text">Complete Now</a>
+            </div>
+            <div class="recommendation-item">
+              <h3>Explore Top Careers</h3>
+              <p>Browse through trending career options in your field of interest.</p>
+              <a href="career-path.html" class="btn btn-text">Explore</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="dashboard-card career-insights">
+          <h2>Career Insights</h2>
+          <div class="insights-content">
+            <p>Complete your personality test to unlock personalized career insights.</p>
+            <div class="insights-placeholder">
+              <div class="placeholder-icon">🔍</div>
+              <p>Your career insights will appear here</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="dashboard-card recent-activity">
+          <h2>Recent Activity</h2>
+          <ul class="activity-list">
+            <li class="activity-item">
+              <div class="activity-icon">📝</div>
+              <div class="activity-details">
+                <p class="activity-title">Account Created</p>
+                <p class="activity-time">Just now</p>
+              </div>
+            </li>
+            <li class="activity-item">
+              <div class="activity-icon">👋</div>
+              <div class="activity-details">
+                <p class="activity-title">Welcome to Pathway AI</p>
+                <p class="activity-time">Just now</p>
+              </div>
+            </li>
+          </ul>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/auth.js"></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/dashboard.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Skip the auth redirect entirely for now
+      const token = localStorage.getItem('pathway_auth_token');
+      console.log("Loaded home.html – token:", token || "none");
+
+      // You can still optionally load user info if token exists
+      if (token) {
+        loadUserProfile();
+        if (isAdmin && typeof isAdmin === 'function' && isAdmin()) {
+          document.getElementById('admin-link').style.display = 'block';
+        }
+      }
+
+      // Sidebar toggle
+      document.getElementById('sidebar-toggle').addEventListener('click', function () {
+        document.querySelector('.dashboard-container').classList.toggle('sidebar-collapsed');
+      });
+
+      // Logout
+      document.getElementById('logout-btn').addEventListener('click', function () {
+        logout(); // assumes this clears token + redirects
+      });
+    });
+  </script>
+</body>
+</html>

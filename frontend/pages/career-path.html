@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Career Path - Pathway AI</title>
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="../css/dark-theme.css" />
+</head>
+<body>
+  <div class="dashboard-container">
+    <aside class="sidebar">
+      <!-- Sidebar header -->
+      <div class="sidebar-header">
+        <div class="logo">
+          <a href="home.html">
+            <img src="../assets/logo.png" alt="Pathway AI Logo" />
+            <h1>Pathway AI</h1>
+          </a>
+        </div>
+        <button id="sidebar-toggle" class="sidebar-toggle"><span></span></button>
+      </div>
+
+      <!-- Sidebar nav -->
+      <nav class="sidebar-nav">
+        <ul>
+          <li><a href="home.html">🏠 Dashboard</a></li>
+          <li><a href="personality-test.html">📝 Personality Test</a></li>
+          <li class="active"><a href="career-path.html">🛤️ Career Paths</a></li>
+          <li id="admin-link" style="display:none"><a href="admin.html">⚙️ Admin</a></li>
+        </ul>
+      </nav>
+
+      <!-- Sidebar footer -->
+      <div class="sidebar-footer">
+        <div class="user-info">
+          <div class="user-avatar"><span id="user-initials">U</span></div>
+          <div class="user-details">
+            <p id="user-name">User Name</p>
+            <p id="user-email">user@example.com</p>
+          </div>
+        </div>
+        <button id="logout-btn" class="btn btn-outline">Log Out</button>
+      </div>
+    </aside>
+
+    <main class="dashboard-content">
+      <header class="dashboard-header">
+        <h1>Career Path</h1>
+      </header>
+
+      <div class="career-detail">
+        <h2 id="career-title">Loading…</h2>
+        <p id="career-description">Please wait while we load the details.</p>
+
+        <h3>Steps to Get There</h3>
+        <div id="career-path-steps" class="path-steps"></div>
+
+        <h3>Recommended Resources</h3>
+        <div id="career-resources" class="resources-list"></div>
+
+        <button id="save-career" class="btn btn-primary">Save This Path</button>
+      </div>
+    </main>
+  </div>
+
+  <!-- Scripts -->
+  <script src="../js/api.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/careerPath.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // 🔐 Redirect to login if not authenticated
+      if (!isAuthenticated()) {
+        window.location.href = 'login.html';
+        return;
+      }
+
+      // 👤 Load user info
+      loadUserProfile();
+
+      // 🛠️ Show admin link if user is admin
+      if (isAdmin()) {
+        document.getElementById('admin-link').style.display = 'block';
+      }
+
+      // 🚪 Setup logout button
+      document.getElementById('logout-btn').addEventListener('click', logout);
+
+      // 📱 Sidebar toggle
+      document.getElementById('sidebar-toggle').addEventListener('click', () => {
+        document.querySelector('.dashboard-container').classList.toggle('sidebar-collapsed');
+      });
+
+      // 🚀 Initialize the career path page
+      initCareerPath(); // assuming careerPath.js exposes this
+    });
+  </script>
+</body>
+</html>

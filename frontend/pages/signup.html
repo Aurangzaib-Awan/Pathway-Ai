@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Pathway AI</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/dark-theme.css">
+</head>
+<body>
+    <div class="container">
+        <header class="minimal-header">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="../assets/logo.png" alt="Pathway AI Logo">
+                    <h1>Pathway AI</h1>
+                </a>
+            </div>
+        </header>
+
+        <main class="auth-container">
+            <div class="auth-card">
+                <h2>Create Your Account</h2>
+                <p class="auth-subtitle">Start your career discovery journey</p>
+                
+                <form id="signupForm" class="auth-form">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required>
+                        <div class="password-toggle" onclick="togglePasswordVisibility('password')">
+                            <span class="eye-icon">👁️</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="career">Career Interest</label>
+                        <select id="career" name="career" required>
+                            <option value="" disabled selected>Select your interest</option>
+                            <option value="technology">Technology</option>
+                            <option value="healthcare">Healthcare</option>
+                            <option value="finance">Finance</option>
+                            <option value="education">Education</option>
+                            <option value="arts">Arts & Design</option>
+                            <option value="business">Business</option>
+                            <option value="science">Science & Research</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div id="signupError" class="error-message"></div>
+                    
+                    <button type="submit" class="btn btn-primary btn-full">Create Account</button>
+                </form>
+                
+                <div class="auth-footer">
+                    <p>Already have an account? <a href="login.html">Log in</a></p>
+                </div>
+            </div>
+        </main>
+
+        <footer class="minimal-footer">
+            <p>&copy; 2025 Pathway AI. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <!-- Load scripts -->
+    <script src="../js/api.js"></script>
+    <script src="../js/auth.js"></script>
+</body>
+</html>

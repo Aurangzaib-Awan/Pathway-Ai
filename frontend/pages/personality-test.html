@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Personality Test - Pathway AI</title>
+  <link rel="stylesheet" href="../css/styles.css"/>
+  <link rel="stylesheet" href="../css/dark-theme.css"/>
+</head>
+<body>
+  <div class="dashboard-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <a href="index.html">
+            <img src="../assets/logo.png" alt="Pathway AI Logo"/>
+            <h1>Pathway AI</h1>
+          </a>
+        </div>
+        <button id="sidebar-toggle" class="sidebar-toggle">
+          <span></span>
+        </button>
+      </div>
+
+      <nav class="sidebar-nav">
+        <ul>
+          <li><a href="home.html"><span class="nav-icon">🏠</span><span class="nav-text">Dashboard</span></a></li>
+          <li class="active"><a href="personality-test.html"><span class="nav-icon">📝</span><span class="nav-text">Personality Test</span></a></li>
+          <li><a href="career-path.html"><span class="nav-icon">🛤️</span><span class="nav-text">Career Paths</span></a></li>
+          <li id="admin-link" style="display: none;">
+            <a href="admin.html"><span class="nav-icon">⚙️</span><span class="nav-text">Admin Dashboard</span></a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-info">
+          <div class="user-avatar"><span id="user-initials">U</span></div>
+          <div class="user-details">
+            <p id="user-name">User Name</p>
+            <p id="user-email">user@example.com</p>
+          </div>
+        </div>
+        <button id="logout-btn" class="btn btn-outline">Log Out</button>
+      </div>
+    </aside>
+
+    <main class="dashboard-content">
+      <header class="dashboard-header">
+        <h1>Personality Assessment</h1>
+        <div class="header-actions">
+          <div class="test-progress">
+            <span id="current-question">1</span>/<span id="total-questions">10</span>
+          </div>
+        </div>
+      </header>
+
+      <div class="test-container">
+        <div id="test-intro" class="test-section active">
+          <div class="test-card">
+            <h2>Discover Your Career Personality</h2>
+            <p>This assessment will help identify your strengths, preferences, and ideal work environment. Answer honestly for the most accurate results.</p>
+            <div class="test-details">
+              <div class="test-detail-item"><span class="test-detail-icon">⏱️</span><span class="test-detail-text">Takes about 5-7 minutes</span></div>
+              <div class="test-detail-item"><span class="test-detail-icon">📊</span><span class="test-detail-text">10 questions</span></div>
+              <div class="test-detail-item"><span class="test-detail-icon">🎯</span><span class="test-detail-text">Personalized results</span></div>
+            </div>
+            <button id="start-test-btn" class="btn btn-primary">Start Assessment</button>
+          </div>
+        </div>
+
+        <div id="test-questions" class="test-section">
+          <div class="test-card">
+            <div id="question-container"></div>
+            <div class="test-navigation">
+              <button id="prev-question" class="btn btn-outline" disabled>Previous</button>
+              <button id="next-question" class="btn btn-primary">Next</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="test-results" class="test-section">
+          <div class="test-card results-card">
+            <h2>Your Personality Profile</h2>
+            <div class="results-summary">
+              <div class="personality-type">
+                <h3 id="personality-type-title">Analytical Innovator</h3>
+                <p id="personality-type-description">You combine creative thinking with analytical skills, making you well-suited for roles that require both innovation and precision.</p>
+              </div>
+              <div class="personality-traits">
+                <h3>Your Key Traits</h3>
+                <ul id="personality-traits-list"></ul>
+              </div>
+            </div>
+            <div class="career-recommendations">
+              <h3>Recommended Career Paths</h3>
+              <div id="career-recommendations-list" class="recommendations-grid"></div>
+            </div>
+            <div class="results-actions">
+              <a href="career-path.html" class="btn btn-primary">Explore Career Paths</a>
+              <a href="home.html" class="btn btn-outline">Back to Dashboard</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Scripts -->
+  <script src="../js/api.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/personalityTest.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      if (!isAuthenticated()) {
+        window.location.href = 'login.html';
+        return;
+      }
+
+      loadUserProfile();
+
+      if (isAdmin()) {
+        document.getElementById('admin-link').style.display = 'block';
+      }
+
+      document.getElementById('logout-btn').addEventListener('click', logout);
+
+      document.getElementById('sidebar-toggle').addEventListener('click', () => {
+        document.querySelector('.dashboard-container').classList.toggle('sidebar-collapsed');
+      });
+
+      initPersonalityTest();
+    });
+  </script>
+</body>
+</html>
